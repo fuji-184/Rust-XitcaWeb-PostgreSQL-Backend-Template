@@ -24,10 +24,17 @@ tokio = "*"
 tokio-uring = { version = "0.5", optional = true }
 
 [profile.release]
-lto = true
-opt-level = 3
 codegen-units = 1
+lto = "fat"
+opt-level = "3"
 panic = "abort"
+codegen-units = 1
+debug = false
+incremental = false
+overflow-checks = false
+
+[build]
+rustflags = ["-C", "target-cpu=native"]
 
 [patch.crates-io]
 tokio = { git = "https://github.com/tokio-rs/tokio.git", rev = "512e9de" }
